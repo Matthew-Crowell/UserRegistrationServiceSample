@@ -1,11 +1,9 @@
 package com.beardtrust.webapp.userregistration.entities;
 
 import lombok.Data;
+import org.hibernate.validator.constraints.UniqueElements;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.UUID;
@@ -18,10 +16,14 @@ import java.util.UUID;
 @Data
 public class User implements Serializable {
 	@Id
+	@Column(unique = true)
 	private String userId;
+	@Column(unique = true)
 	private String username;
 	private String password;
+	@Column(unique = true)
 	private String email;
+	@Column(unique = true)
 	private String phone;
 	private String firstName;
 	private String lastName;

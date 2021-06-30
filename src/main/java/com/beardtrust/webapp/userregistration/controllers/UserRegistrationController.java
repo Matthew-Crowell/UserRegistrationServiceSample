@@ -35,6 +35,7 @@ public class UserRegistrationController implements UsersApi {
 	}
 
 	@Override
+	@Consumes({MediaType.ALL_VALUE, MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
 	public ResponseEntity<Void> registerUser(@Valid @RequestBody UserRegistration body) {
 		ResponseEntity<Void> response;
 		if(userRegistrationService.registerUser(body) != null){
