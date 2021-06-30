@@ -1,13 +1,13 @@
 package com.beardtrust.webapp.userregistration.entities;
 
-import com.beardtrust.webapp.userregistration.dtos.UserDTO;
 import lombok.Data;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.util.Date;
+import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.UUID;
 
 /**
@@ -16,7 +16,7 @@ import java.util.UUID;
 @Entity
 @Table(name = "users")
 @Data
-public class User {
+public class User implements Serializable {
 	@Id
 	private String userId;
 	private String username;
@@ -26,7 +26,7 @@ public class User {
 	private String firstName;
 	private String lastName;
 	@Column(name = "dob")
-	private Date dateOfBirth;
+	private LocalDate dateOfBirth;
 	private String role;
 
 	/**
@@ -48,7 +48,7 @@ public class User {
 	 */
 	public User(String username, String password, String email,
 				String phone, String firstName, String lastName,
-				Date dateOfBirth, String role) {
+				LocalDate dateOfBirth, String role) {
 		this.userId = UUID.randomUUID().toString();
 		this.username = username;
 		this.password = password;
@@ -60,21 +60,15 @@ public class User {
 		this.role = role;
 	}
 
-
-	/**
-	 * Instantiates a new User.
-	 *
-	 * @param userDTO the user dto
-	 */
-	public User(UserDTO userDTO) {
+	public User(UserRegistration user) {
 		this.userId = UUID.randomUUID().toString();
-		this.username = userDTO.getUsername();
-		this.password = userDTO.getPassword();
-		this.email = userDTO.getEmail();
-		this.phone = userDTO.getPhone();
-		this.firstName = userDTO.getFirstName();
-		this.lastName = userDTO.getLastName();
-		this.dateOfBirth = userDTO.getDateOfBirth();
-		this.role = userDTO.getRole();
+		this.username = user.getUsername();
+		this.password = user.getPassword();
+		this.email = user.getEmail();
+		this.phone = user.getPhone();
+		this.firstName = user.getFirstName();
+		this.lastName = user.getLastName();
+		this.dateOfBirth = user.getDateOfBirth();
+		this.role = user.getRole();
 	}
 }

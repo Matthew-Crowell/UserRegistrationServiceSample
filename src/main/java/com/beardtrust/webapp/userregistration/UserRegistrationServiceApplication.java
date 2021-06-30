@@ -12,4 +12,6 @@ public class UserRegistrationServiceApplication {
 		SpringApplication.run(UserRegistrationServiceApplication.class, args);
 	}
 
+
+
 }

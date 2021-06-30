@@ -1,7 +1,7 @@
 package com.beardtrust.webapp.userregistration.services;
 
-import com.beardtrust.webapp.userregistration.dtos.UserDTO;
 import com.beardtrust.webapp.userregistration.entities.User;
+import com.beardtrust.webapp.userregistration.entities.UserRegistration;
 
 /**
  * The interface User registration service.
@@ -14,5 +14,5 @@ public interface UserRegistrationService {
 	 * @param user the user
 	 * @return the user
 	 */
-	User registerUser(UserDTO user);
+	User registerUser(UserRegistration user);
 }

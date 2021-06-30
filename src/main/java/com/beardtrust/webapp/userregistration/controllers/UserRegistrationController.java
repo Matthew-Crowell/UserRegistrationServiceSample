@@ -1,21 +1,27 @@
 package com.beardtrust.webapp.userregistration.controllers;
 
-import com.beardtrust.webapp.userregistration.dtos.UserDTO;
-import com.beardtrust.webapp.userregistration.entities.User;
+
+import com.beardtrust.webapp.userregistration.api.UsersApi;
+import com.beardtrust.webapp.userregistration.entities.UserRegistration;
 import com.beardtrust.webapp.userregistration.services.UserRegistrationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import javax.validation.Valid;
+import javax.ws.rs.Consumes;
 
 /**
  * The type User registration controller.
  */
 @RestController
 @CrossOrigin
-@RequestMapping(path = "/users")
-public class UserRegistrationController {
+public class UserRegistrationController implements UsersApi {
+
 	private final UserRegistrationService userRegistrationService;
 
 	/**
@@ -28,14 +34,14 @@ public class UserRegistrationController {
 		this.userRegistrationService = userRegistrationService;
 	}
 
-	/**
-	 * Register user user.
-	 *
-	 * @param user the user dto
-	 * @return the user
-	 */
-	@PostMapping
-	public ResponseEntity<User> registerUser(@RequestBody UserDTO user) {
-		return new ResponseEntity<>(userRegistrationService.registerUser(user), HttpStatus.OK);
+	@Override
+	public ResponseEntity<Void> registerUser(@Valid @RequestBody UserRegistration body) {
+		ResponseEntity<Void> response;
+		if(userRegistrationService.registerUser(body) != null){
+			response = new ResponseEntity<>(HttpStatus.OK);
+		} else {
+			response = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		return response;
 	}
 }

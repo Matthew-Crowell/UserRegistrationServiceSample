@@ -1,8 +1,8 @@
 package com.beardtrust.webapp.userregistration.services;
 
 import com.beardtrust.webapp.userregistration.controllers.UserRegistrationController;
-import com.beardtrust.webapp.userregistration.dtos.UserDTO;
 import com.beardtrust.webapp.userregistration.entities.User;
+import com.beardtrust.webapp.userregistration.entities.UserRegistration;
 import com.beardtrust.webapp.userregistration.repos.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,8 +21,7 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
 	}
 
 	@Override
-	public User registerUser(UserDTO user) {
-
-		return userRepository.save(new User(user));
+	public User registerUser(UserRegistration userRegistration) {
+		return userRepository.save(new User(userRegistration));
 	}
 }
